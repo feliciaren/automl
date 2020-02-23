@@ -4,13 +4,18 @@
 @Author: feliciaren
 @Date: 2020-02-23 14:53:01
 @LastEditors: feliciaren
-@LastEditTime: 2020-02-23 18:03:20
+@LastEditTime: 2020-02-23 21:21:09
 '''
 import numpy as np
+import sys
+
+sys.path.append("..")
+
 from sklearn.gaussian_process import GaussianProcessRegressor
 from sklearn.gaussian_process.kernels import Matern
 
 from server.search.basic_search import BasicSearch
+from server.search.random_search import RandomSearch
 from server.study import Study 
 from server.trials import Trials 
 
@@ -22,6 +27,7 @@ class BayesianOptimization(BasicSearch):
         self.params = study.configuration
         self.study_name = study.name
         self.goal = study.goal
+        self.study = study
 
         self.bounds = []
 
@@ -45,6 +51,17 @@ class BayesianOptimization(BasicSearch):
         self.bounds = np.asarray(self.bounds)
 
     def _get_next_trial(self,trials_list = [],number = 1):
+
+        random_init_trial_number = 3
+        number = 1
+
+        # Use random search if it has less dataset
+        if len(trials_list) < random_init_trial_number:
+            randomSearch= RandomSearch()
+            return_trials = randomSearch._get_next_trial(
+                self.study, trials_list, number)
+            return return_trials
+        
 
         # Construct data to train gaussian process, Example: [[50], [150], [250]]
         init_points = []
@@ -172,7 +189,7 @@ class BayesianOptimization(BasicSearch):
 
                 suggested_dict[param["parameterName"]] = suggested_parameter_value
 
-        new_trial = Trials(study_name = self.study_name,params=suggested_dict)
+        new_trial = Trials(study_name = self.study_name,params=suggested_dict,create_time=time.time(),update_time=time.time())
         trials_list.append(new_trial)
         return trials_list[-1]
     

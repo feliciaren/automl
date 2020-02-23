@@ -4,7 +4,7 @@
 @Author: feliciaren
 @Date: 2020-02-02 18:48:48
 @LastEditors: feliciaren
-@LastEditTime: 2020-02-23 17:00:05
+@LastEditTime: 2020-02-23 20:01:56
 '''
 import json
 import uuid
@@ -34,7 +34,7 @@ class Study(object):
 
     def _info(self):
         print("================{}_Configuration================".format(self.name))
-        print("Create Time: {}, Update Time:{}".format(self.create_time,self.update_time))
+        print("Create Time: {}, Update Time:{}".format(time.asctime(self.create_time),time.asctime(self.update_time)))
         print("Goal:{}".format(self.goal))
         print("Feasible Space:")
         for key in self.configuaration:

@@ -4,8 +4,11 @@
 @Author: feliciaren
 @Date: 2020-02-02 18:48:48
 @LastEditors: feliciaren
-@LastEditTime: 2020-02-23 17:57:22
+@LastEditTime: 2020-02-23 20:01:26
 '''
+
+import time
+
 class Trials(object):
 
     
@@ -36,7 +39,7 @@ class Trials(object):
     
     def _info(self):
         print("================{}_{}================".format(self.study_name,self.id))
-        print("ID: {}, Create Time: {}, Update Time:{}".format(self.id,self.create_time,self.update_time))
+        print("ID: {}, Create Time: {}, Update Time:{}".format(self.id,time.asctime(self.create_time),time.asctime(self.update_time)))
         print("Parameters:")
         for key in self.params:
             print("{}: {}".format(key,self.params[key]))

@@ -4,10 +4,15 @@
 @Author: feliciaren
 @Date: 2020-02-22 19:36:41
 @LastEditors: feliciaren
-@LastEditTime: 2020-02-23 17:58:34
+@LastEditTime: 2020-02-23 20:15:26
 '''
 
 import itertools
+import time
+
+import sys
+
+sys.path.append("..")
 
 from server.search.basic_search import BasicSearch
 from server.study import Study 
@@ -48,7 +53,7 @@ class GridSearch(BasicSearch):
     def _get_next_trial(self,trials_list = [],number = 1):
 
         if len(trials_list) < self.param_num:
-            new_trial = Trials(study_name = self.study_name,params=self.all_combination[len(trials_list)])
+            new_trial = Trials(study_name = self.study_name,params=self.all_combination[len(trials_list)],create_time=time.time(),update_time=time.time())
             trials_list.append(new_trial)
             return trials_list[-1]
         else:

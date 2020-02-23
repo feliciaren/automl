@@ -1,0 +1,57 @@
+{
+    "goal": "MINIMIZE",
+    "params": [
+        {
+            "feasiblePoints": [
+                128,
+                256,
+                512,
+                1024
+            ],
+            "parameterName": "hidden_layer_size",
+            "scalingType": "LINEAR",
+            "type": "DISCRETE"
+        },
+        {
+            "feasiblePoints": [
+                32,
+                64,
+                128,
+                256,
+                512,
+                1024
+            ],
+            "parameterName": "batch_size",
+            "scalingType": "LINEAR",
+            "type": "DISCRETE"
+        },
+        {
+            "maxValue": 20,
+            "minValue": 5,
+            "parameterName": "depth",
+            "scalingType": "LINEAR",
+            "type": "INTEGER"
+        },
+        {
+            "maxValue": 0.5,
+            "minValue": 1e-06,
+            "parameterName": "lr",
+            "scalingType": "LINEAR",
+            "type": "DOUBLE"
+        },
+        {
+            "maxValue": 0.99,
+            "minValue": 0.01,
+            "parameterName": "lr_decay",
+            "scalingType": "LINEAR",
+            "type": "DOUBLE"
+        },
+        {
+            "maxValue": 0.99,
+            "minValue": 1e-05,
+            "parameterName": "regularization_rate",
+            "scalingType": "LINEAR",
+            "type": "DOUBLE"
+        }
+    ]
+}
