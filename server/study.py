@@ -3,8 +3,8 @@
 @version: 
 @Author: feliciaren
 @Date: 2020-02-02 18:48:48
-@LastEditors  : feliciaren
-@LastEditTime : 2020-02-10 16:07:56
+@LastEditors: feliciaren
+@LastEditTime: 2020-02-22 19:52:28
 '''
 import json
 import uuid
@@ -25,19 +25,19 @@ class Study(object):
         self.create_time = create_time
         self.update_time = update_time
 
-    def ToJson(self):
-        dic = self.ToDict()
+    def _to_json(self):
+        dic = self._to_dict()
         with open(self.name,'w',encoding='utf-8') as f:
             json.dump(f,dic,indent=4)
 
-    def PrintInfo(self):
-        print("================{}_Configuration================".format(self.study_name,self.id))
+    def _info(self):
+        print("================{}_Configuration================".format(self.name))
         print("Create Time: {}, Update Time:{}".format(self.create_time,self.update_time))
         print("Feasible Space:")
         for key in self.configuaration:
             print("{}: {}".format(key,self.configuaration[key]))
     
-    def ToDict(self):
+    def _to_dict(self):
         dic = {}
         dic['name'] = self.name
         dic['configuaration'] = self.configuaration
@@ -46,7 +46,7 @@ class Study(object):
         return dic
 
     @classmethod
-    def FromJson(self,json_file):
+    def fromjson(self,json_file):
         with open(json_file,'r',encoding='utf-8') as f:
             dic = json.load(f)
 
