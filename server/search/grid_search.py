@@ -4,7 +4,7 @@
 @Author: feliciaren
 @Date: 2020-02-22 19:36:41
 @LastEditors: feliciaren
-@LastEditTime: 2020-02-23 14:46:51
+@LastEditTime: 2020-02-23 17:58:34
 '''
 
 import itertools
@@ -17,7 +17,7 @@ class GridSearch(BasicSearch):
 
     def __init__(self,study = None):
 
-
+        assert(study.__class__==Study)
         params = study.configuration
         
         # [['8', '16', '32', '64'], ['sgd', 'adagrad', 'adam', 'ftrl'], ['true', 'false']]
@@ -38,14 +38,18 @@ class GridSearch(BasicSearch):
 
         for value in range(len(all_combination_value)):
             combination = {}
+            
             for j in len(value):
                 combination[param_key_list[j]] = value[j]
             self.all_combination.append(combination)
+        
+        self.study_name = study.name
     
     def _get_next_trial(self,trials_list = [],number = 1):
-        
-        if len(trials_list)<self.param_num:
-            trials_list.append(self.all_combination[len(trials_list)])
+
+        if len(trials_list) < self.param_num:
+            new_trial = Trials(study_name = self.study_name,params=self.all_combination[len(trials_list)])
+            trials_list.append(new_trial)
             return trials_list[-1]
         else:
             return None

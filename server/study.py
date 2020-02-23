@@ -4,7 +4,7 @@
 @Author: feliciaren
 @Date: 2020-02-02 18:48:48
 @LastEditors: feliciaren
-@LastEditTime: 2020-02-22 19:52:28
+@LastEditTime: 2020-02-23 17:00:05
 '''
 import json
 import uuid
@@ -16,12 +16,14 @@ class Study(object):
                 name,
                 configuration,
                 algorithm = "BayesianOptimization",
+                goal = None,
                 create_time = None,
                 update_time = None):
 
         self.name = name
         self.configuaration = configuration
         self.algorithm = algorithm
+        self.goal = goal
         self.create_time = create_time
         self.update_time = update_time
 
@@ -33,6 +35,7 @@ class Study(object):
     def _info(self):
         print("================{}_Configuration================".format(self.name))
         print("Create Time: {}, Update Time:{}".format(self.create_time,self.update_time))
+        print("Goal:{}".format(self.goal))
         print("Feasible Space:")
         for key in self.configuaration:
             print("{}: {}".format(key,self.configuaration[key]))
@@ -43,6 +46,7 @@ class Study(object):
         dic['configuaration'] = self.configuaration
         dic['create_time'] = self.create_time
         dic['update_time'] = self.update_time
+        dic['goal'] = self.goal
         return dic
 
     @classmethod
@@ -54,11 +58,17 @@ class Study(object):
             assert('name' in dic)
             name = dic.pop('name') + uuid.uuid3(uuid.NAMESPACE_DNS,dic['name'])
         except AssertionError:
-            name = uuid.uuid3(uuid.NAMESPACE_DNS,dic['name'])
+            name = uuid.uuid3(uuid.NAMESPACE_DNS,'')
+
+        try:
+            assert('goal' in dic)
+            goal = dic.pop('goal')
+        except AssertionError:
+            goal = None
 
         try:
             assert('algorithm' in dic)
             algorithm = dic.pop('algorithm')
-            return Study(name = name,configuration = dic['configuration'],algorithm = algorithm, create_time = time.time(),update_time = time.time())
+            return Study(name = name,configuration = dic['configuration'],algorithm = algorithm, goal = goal,create_time = time.time(),update_time = time.time())
         except AssertionError:
-            return Study(name = name,configuration = dic['configuration'],create_time = time.time(),update_time = time.time())
+            return Study(name = name,configuration = dic['configuration'], goal = goal, create_time = time.time(),update_time = time.time())
