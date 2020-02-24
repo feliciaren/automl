@@ -4,20 +4,19 @@
 @Author: feliciaren
 @Date: 2020-02-23 14:53:01
 @LastEditors: feliciaren
-@LastEditTime: 2020-02-23 21:21:09
+@LastEditTime: 2020-02-23 23:19:56
 '''
+__all__ = ['BayesianOptimization']
 import numpy as np
-import sys
-
-sys.path.append("..")
+import time
 
 from sklearn.gaussian_process import GaussianProcessRegressor
 from sklearn.gaussian_process.kernels import Matern
 
-from server.search.basic_search import BasicSearch
-from server.search.random_search import RandomSearch
-from server.study import Study 
-from server.trials import Trials 
+from .basic_search import BasicSearch
+from .random_search import RandomSearch
+from study import Study 
+from trials import Trials 
 
 class BayesianOptimization(BasicSearch):
 
@@ -58,8 +57,7 @@ class BayesianOptimization(BasicSearch):
         # Use random search if it has less dataset
         if len(trials_list) < random_init_trial_number:
             randomSearch= RandomSearch()
-            return_trials = randomSearch._get_next_trial(
-                self.study, trials_list, number)
+            return_trials = randomSearch._get_next_trial(self.study, trials_list, number)
             return return_trials
         
 

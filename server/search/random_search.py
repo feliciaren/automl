@@ -4,20 +4,21 @@
 @Author: feliciaren
 @Date: 2020-02-23 21:05:21
 @LastEditors: feliciaren
-@LastEditTime: 2020-02-23 21:19:14
+@LastEditTime: 2020-02-23 23:10:27
 '''
+__all__ = ['RandomSearch']
 import json
 import random
 import time
 
-from server.study import Study
-from server.trials import Trials
-from server.search.basic_search import BasicSearch
-from server.search.static import RandomAlgorithm
+from study import Study
+from trials import Trials
+from .basic_search import BasicSearch
+from .static import RandomAlgorithm
 
 
 class RandomSearch(BasicSearch):
-  def get_new_suggestions(self, study, trials_list=[], number=1):
+  def _get_next_trial(self, study, trials_list=[], number=1):
     """
     Get the new suggested trials with random search.
     """

@@ -4,19 +4,19 @@
 @Author: feliciaren
 @Date: 2020-02-22 19:36:41
 @LastEditors: feliciaren
-@LastEditTime: 2020-02-23 20:15:26
+@LastEditTime: 2020-02-23 22:55:33
 '''
 
+
+__all__ = ['GridSearch']
 import itertools
 import time
 
-import sys
 
-sys.path.append("..")
 
-from server.search.basic_search import BasicSearch
-from server.study import Study 
-from server.trials import Trials 
+from .basic_search import BasicSearch
+from study import Study 
+from trials import Trials 
 
 class GridSearch(BasicSearch):
 

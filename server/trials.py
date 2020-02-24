@@ -4,9 +4,9 @@
 @Author: feliciaren
 @Date: 2020-02-02 18:48:48
 @LastEditors: feliciaren
-@LastEditTime: 2020-02-23 20:01:26
+@LastEditTime: 2020-02-23 23:28:25
 '''
-
+__all__ = ['Trials']
 import time
 
 class Trials(object):
@@ -39,13 +39,11 @@ class Trials(object):
     
     def _info(self):
         print("================{}_{}================".format(self.study_name,self.id))
-        print("ID: {}, Create Time: {}, Update Time:{}".format(self.id,time.asctime(self.create_time),time.asctime(self.update_time)))
+        print("ID: {}, Create Time: {}, Update Time:{}".format(self.id,time.asctime(time.localtime(self.create_time)),time.asctime(time.localtime(self.update_time))))
         print("Parameters:")
         for key in self.params:
             print("{}: {}".format(key,self.params[key]))
-        print("Metics:")
-        for key in self.metric:
-            print("{}: {}".format(key,self.metric[key]))
+        print("Metics:", self.metric)
     
     def _to_dict(self,dic):
         return {'study_name':self.study_name,'status':self.status,

@@ -4,12 +4,12 @@
 @Author: feliciaren
 @Date: 2020-02-02 18:48:48
 @LastEditors: feliciaren
-@LastEditTime: 2020-02-23 20:01:56
+@LastEditTime: 2020-02-23 23:24:12
 '''
+__all__ = ['Study']
 import json
 import uuid
 import time
-
 class Study(object):
     
     def __init__(self,
@@ -21,7 +21,7 @@ class Study(object):
                 update_time = None):
 
         self.name = name
-        self.configuaration = configuration
+        self.configuration = configuration
         self.algorithm = algorithm
         self.goal = goal
         self.create_time = create_time
@@ -34,7 +34,7 @@ class Study(object):
 
     def _info(self):
         print("================{}_Configuration================".format(self.name))
-        print("Create Time: {}, Update Time:{}".format(time.asctime(self.create_time),time.asctime(self.update_time)))
+        print("Create Time: {}, Update Time:{}".format(time.asctime(time.localtime(self.create_time)),time.asctime(time.localtime(self.update_time))))
         print("Goal:{}".format(self.goal))
         print("Feasible Space:")
         for key in self.configuaration:
@@ -69,6 +69,7 @@ class Study(object):
         try:
             assert('algorithm' in dic)
             algorithm = dic.pop('algorithm')
-            return Study(name = name,configuration = dic['configuration'],algorithm = algorithm, goal = goal,create_time = time.time(),update_time = time.time())
         except AssertionError:
-            return Study(name = name,configuration = dic['configuration'], goal = goal, create_time = time.time(),update_time = time.time())
+            algorithm = "BayesianOptimization"
+        
+        return Study(name = name,configuration = dic['params'],algorithm = algorithm, goal = goal,create_time = time.time(),update_time = time.time())

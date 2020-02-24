@@ -4,16 +4,16 @@
 @Author: feliciaren
 @Date: 2020-02-23 10:25:07
 @LastEditors: feliciaren
-@LastEditTime: 2020-02-23 14:43:11
+@LastEditTime: 2020-02-23 23:07:14
 '''
 import abc
-
+__all__ = ['BasicSearch']
 class BasicSearch(object):
     __metaclass__ = abc.ABCMeta
 
 
     @abc.abstractmethod
-    def _get_next_trial(self, study = None, trials_list = [], number = 1):
+    def _get_next_trial(self):
 
       '''
       Args:
@@ -46,4 +46,4 @@ class BasicSearch(object):
       
       '''
 
-      raise NotImplementedError
+      pass
