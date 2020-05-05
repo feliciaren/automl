@@ -4,7 +4,7 @@
 @Author: feliciaren
 @Date: 2020-02-02 18:48:48
 @LastEditors: feliciaren
-@LastEditTime: 2020-03-19 08:39:22
+@LastEditTime: 2020-05-05 20:12:11
 '''
 __all__ = ['Study']
 
@@ -51,12 +51,37 @@ class Study(object):
         return dic
 
     @classmethod
-    def fromjson(self,json):
+    def _from_dict(self,dic):
         # with open(json_file,'r',encoding='utf-8') as f:
         #     dic = json.load(f)
 
-        # try:
-        assert('name' in dic)
+        try:
+            assert('name' in dic)
+            name = dic.pop('name') + uuid.uuid3(uuid.NAMESPACE_DNS,dic['name'])
+        except AssertionError:
+            name = uuid.uuid3(uuid.NAMESPACE_DNS,'')
+
+        try:
+            assert('goal' in dic)
+            goal = dic.pop('goal')
+        except AssertionError:
+            goal = None
+
+        try:
+            assert('algorithm' in dic)
+            algorithm = dic.pop('algorithm')
+        except AssertionError:
+            algorithm = "BayesianOptimization"
+        
+        return Study(name = name,configuration = dic['params'],algorithm = algorithm, goal = goal,create_time = time.time(),update_time = time.time())
+    
+    @classmethod
+    def _from_json(self,json):
+        with open(json_file,'r',encoding='utf-8') as f:
+            dic = json.load(f)
+
+        try:
+            assert('name' in dic)
             name = dic.pop('name') + uuid.uuid3(uuid.NAMESPACE_DNS,dic['name'])
         except AssertionError:
             name = uuid.uuid3(uuid.NAMESPACE_DNS,'')

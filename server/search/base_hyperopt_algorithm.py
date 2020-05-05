@@ -4,7 +4,7 @@
 @Author: feliciaren
 @Date: 2020-04-12 17:04:10
 @LastEditors: feliciaren
-@LastEditTime: 2020-04-12 18:30:01
+@LastEditTime: 2020-05-05 21:10:33
 '''
 
 
@@ -16,14 +16,14 @@ import json
 import numpy as np
 import hyperopt
 
-from .basic_search import BasicSearch
-from study import Study 
-from trials import Trials 
+from server.search.basic_search import BasicSearch
+from server.model.study import Study 
+from server.model.trials import Trials 
 
 
 
 class BaseHyperoptAlgorithm(BasicSearch):
-  def __init__(self, algorithm_name="tpe",study = None):
+  def __init__(self, algorithm_name="tpe"):
 
     if algorithm_name == 'tpe':
       self.hyperopt_algorithm = hyperopt.tpe.suggest
@@ -32,14 +32,13 @@ class BaseHyperoptAlgorithm(BasicSearch):
     elif algorithm_name == 'anneal':
       self.hyperopt_algorithm = hyperopt.anneal.suggest
     
-    assert(study.__class__==Study)
-    self.study = study
 
-  def _get_next_trial(self, input_trials=[], number=1):
+  def _get_next_trial(self, study = None,trials_list=[], number=1):
     """
     Get the new suggested trials with TPE algorithm.
     """
-
+    assert(study.__class__==Study)
+    self.study = study
     # Construct search space, example: {"x": hyperopt.hp.uniform('x', -10, 10), "x2": hyperopt.hp.uniform('x2', -10, 10)}
     hyperopt_search_space = {}
 
@@ -79,7 +78,7 @@ class BaseHyperoptAlgorithm(BasicSearch):
 
     # completed_advisor_trials = Trial.objects.filter(
     #     study_name=study_name, status="Completed")
-    completed_advisor_trials = input_trials[:-1]
+    completed_advisor_trials = trials_list[:-1]
 
     for index, trial in enumerate(completed_advisor_trials):
       # Example: {"learning_rate": 0.01, "optimizer": "ftrl"}
@@ -175,7 +174,7 @@ class BaseHyperoptAlgorithm(BasicSearch):
     rval.trials.refresh()
 
     # Construct return advisor trials from new hyperopt trials
-    return_trial_list = []
+    return_list = []
 
     for i in range(number):
 
@@ -210,6 +209,7 @@ class BaseHyperoptAlgorithm(BasicSearch):
     #   new_advisor_trial.save()
     #   return_trial_list.append(new_advisor_trial)
       new_trial = Trials(study_name = self.study.name,params=parameter_values_json,create_time=time.time(),update_time=time.time())
-      input_trials.append(new_trial)
+      trials_list.append(new_trial)
+      return_list.append(new_trial)
 
-    return new_trial 
+    return return_list 

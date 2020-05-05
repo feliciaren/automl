@@ -4,10 +4,10 @@
 @Author: feliciaren
 @Date: 2020-03-19 07:46:11
 @LastEditors: feliciaren
-@LastEditTime: 2020-03-19 08:49:04
+@LastEditTime: 2020-05-05 19:29:26
 '''
-from model.worker import Worker
-from model.globals import RespType
+from server.model.worker import Worker
+from server.model.globals import RespType
 import msgpack
 import aiohttp.web
 

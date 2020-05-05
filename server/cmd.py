@@ -4,7 +4,7 @@
 @Author: feliciaren
 @Date: 2020-03-19 07:59:30
 @LastEditors: feliciaren
-@LastEditTime: 2020-03-19 09:15:18
+@LastEditTime: 2020-05-05 19:33:01
 '''
 
 import argparse
@@ -13,9 +13,9 @@ import asyncio
 import aiohttp.web
 
 
-from model.worker import Worker
-from model.http_handler import HTTPHandler
-from model.globals import RespType
+from server.model.worker import Worker
+from server.model.http_handler import HTTPHandler
+from server.model.globals import RespType
 
 
 parser = argparse.ArgumentParser(description='A simple AutoML serving application by using PyTorch and aiohttp.')

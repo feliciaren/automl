@@ -4,7 +4,7 @@
 @Author: feliciaren
 @Date: 2020-02-22 19:36:41
 @LastEditors: feliciaren
-@LastEditTime: 2020-02-23 22:55:33
+@LastEditTime: 2020-05-05 20:55:07
 '''
 
 
@@ -15,12 +15,12 @@ import time
 
 
 from .basic_search import BasicSearch
-from study import Study 
-from trials import Trials 
+from server.model.study import Study 
+from server.model.trials import Trials 
 
 class GridSearch(BasicSearch):
 
-    def __init__(self,study = None):
+    def _get_next_trial(self,study = None,trials_list = [],number = 1):
 
         assert(study.__class__==Study)
         params = study.configuration
@@ -48,15 +48,18 @@ class GridSearch(BasicSearch):
             self.all_combination.append(combination)
         self.combination_num = len(self.all_combination)
         self.study_name = study.name
-    
-    def _get_next_trial(self,trials_list = [],number = 1):
 
-        if len(trials_list) < self.combination_num:
-            new_trial = Trials(study_name = self.study_name,params=self.all_combination[len(trials_list)],create_time=time.time(),update_time=time.time())
+
+        return_list = []
+        # if len(trials_list)+ number <= self.combination_num:
+        for i in range(number):
+            idex = len(trials_list) % len(self.all_combination)
+            new_trial = Trials(study_name = self.study_name,params=self.all_combination[idex],create_time=time.time(),update_time=time.time())
             trials_list.append(new_trial)
-            return trials_list[-1]
-        else:
-            return None
+            return_list.append(new_trial)
+            # return trials_list[-1]
+        return return_list
+            
 
     
 

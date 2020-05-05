@@ -4,16 +4,16 @@
 @Author: feliciaren
 @Date: 2020-02-02 18:48:48
 @LastEditors: feliciaren
-@LastEditTime: 2020-03-19 09:08:01
+@LastEditTime: 2020-05-05 19:33:19
 '''
 
 import json
 import os
 import asyncio
-from model.study import Study
-from search.bayesian_optimization import BayesianOptimization
-from search.random_search import RandomSearch
-from search.grid_search import GridSearch
+from server.model.study import Study
+from server.search.bayesian_optimization import BayesianOptimization
+from server.search.random_search import RandomSearch
+from server.search.grid_search import GridSearch
 
 __all__=['Worker']
 

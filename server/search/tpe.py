@@ -4,9 +4,9 @@
 @Author: feliciaren
 @Date: 2020-04-12 17:11:51
 @LastEditors: feliciaren
-@LastEditTime: 2020-04-12 17:29:28
+@LastEditTime: 2020-05-05 21:06:02
 '''
-from .base_hyperopt_algorithm import BaseHyperoptAlgorithm
+from server.search.base_hyperopt_algorithm import BaseHyperoptAlgorithm
 
 
 class TpeAlgorithm(BaseHyperoptAlgorithm):
@@ -14,5 +14,5 @@ class TpeAlgorithm(BaseHyperoptAlgorithm):
   Get the new suggested trials with TPE algorithm.
   """
 
-  def __init__(self,study = None):
-    super(TpeAlgorithm, self).__init__("tpe",study)
+  def __init__(self):
+    super(TpeAlgorithm, self).__init__("tpe")

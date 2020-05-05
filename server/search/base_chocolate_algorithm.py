@@ -4,29 +4,30 @@
 @Author: feliciaren
 @Date: 2020-04-12 18:23:11
 @LastEditors: feliciaren
-@LastEditTime: 2020-04-12 18:52:01
+@LastEditTime: 2020-05-05 21:26:59
 '''
 import json
 import chocolate as choco
 import time
 
 
-from .basic_search import BasicSearch
-from study import Study 
-from trials import Trials 
+from server.search.basic_search import BasicSearch
+from server.model.study import Study 
+from server.model.trials import Trials 
 
 
 class BaseChocolateAlgorithm(BasicSearch):
-  def __init__(self, algorithm_name="QuasiRandom", study = None):
+  def __init__(self, algorithm_name="QuasiRandom"):
 
     self.algorithm_name = algorithm_name
-    assert(study.__class__==Study)
-    self.study = study
 
-  def _get_next_trial(self, input_trials=[], number=1):
+
+  def _get_next_trial(self, study,trial_list=[], number=1):
     """
     Get the new suggested trials with Chocolate algorithm.
     """
+    assert(study.__class__==Study)
+    self.study = study
 
     # 1. Construct search space
     # Example: {"x" : choco.uniform(-6, 6), "y" : choco.uniform(-6, 6)}
@@ -71,7 +72,7 @@ class BaseChocolateAlgorithm(BasicSearch):
     # 2. Update with completed advisor trials
     # completed_advisor_trials = Trial.objects.filter(
     #     study_name=study_name, status="Completed")
-    completed_advisor_trials = input_trials[:-1]
+    completed_advisor_trials = trial_list[:-1]
 
     for index, trial in enumerate(completed_advisor_trials):
       parameter_values_json = trial.params
@@ -86,7 +87,7 @@ class BaseChocolateAlgorithm(BasicSearch):
       conn.insert_result(entry)
 
     # 3. Run algorithm and construct return advisor trials
-    return_trial_list = []
+    return_list = []
 
     for i in range(number):
 
@@ -106,6 +107,7 @@ class BaseChocolateAlgorithm(BasicSearch):
               chocolate_params[param["parameterName"]])
 
       new_trial = Trials(study_name = self.study.name,params=parameter_values_json,create_time=time.time(),update_time=time.time())
-      input_trials.append(new_trial)
+      trial_list.append(new_trial)
+      return_list.append(new_trial)
 
-    return new_trial
+    return return_list

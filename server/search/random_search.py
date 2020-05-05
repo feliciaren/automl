@@ -4,17 +4,17 @@
 @Author: feliciaren
 @Date: 2020-02-23 21:05:21
 @LastEditors: feliciaren
-@LastEditTime: 2020-02-23 23:10:27
+@LastEditTime: 2020-05-05 20:58:15
 '''
 __all__ = ['RandomSearch']
 import json
 import random
 import time
 
-from study import Study
-from trials import Trials
-from .basic_search import BasicSearch
-from .static import RandomAlgorithm
+from server.model.study import Study
+from server.model.trials import Trials
+from server.search.basic_search import BasicSearch
+from server.search.static import RandomAlgorithm
 
 
 class RandomSearch(BasicSearch):
@@ -23,7 +23,7 @@ class RandomSearch(BasicSearch):
     Get the new suggested trials with random search.
     """
 
-    return_trial_list = []
+    return_list = []
     params = study.configuration
     study_name = study.name
 
@@ -52,7 +52,8 @@ class RandomSearch(BasicSearch):
 
         parameter_values_json[param["parameterName"]] = suggest_value
 
-    new_trial = Trials(study_name = study_name,params=parameter_values_json,create_time=time.time(),update_time=time.time())
-    trials_list.append(new_trial)
+      new_trial = Trials(study_name = study_name,params=parameter_values_json,create_time=time.time(),update_time=time.time())
+      return_list.append(new_trial)
+      trials_list.append(new_trial)
 
-    return trials_list[-1]
+    return return_list

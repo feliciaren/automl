@@ -4,7 +4,7 @@
 @Author: feliciaren
 @Date: 2020-02-23 10:25:07
 @LastEditors: feliciaren
-@LastEditTime: 2020-02-23 23:07:14
+@LastEditTime: 2020-05-05 20:54:26
 '''
 import abc
 __all__ = ['BasicSearch']
@@ -13,7 +13,7 @@ class BasicSearch(object):
 
 
     @abc.abstractmethod
-    def _get_next_trial(self):
+    def _get_next_trial(self,study=None):
 
       '''
       Args:
