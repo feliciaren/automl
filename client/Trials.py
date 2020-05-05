@@ -2,18 +2,20 @@
 @Descripttion: 
 @version: 
 @Author: feliciaren
-@Date: 2020-02-02 18:48:13
-@LastEditors  : feliciaren
-@LastEditTime : 2020-02-06 11:05:13
+@Date: 2020-02-02 18:48:48
+@LastEditors: feliciaren
+@LastEditTime: 2020-03-19 08:59:42
 '''
+__all__ = ['Trials']
+import time
 
 class Trials(object):
 
     
     def __init__(self,
                 study_name,
-                paras = None,
-                status = None,
+                params = None,
+                status = "ToDo",
                 create_time = None,
                 update_time = None,
                 train_step = 10,
@@ -22,38 +24,36 @@ class Trials(object):
                 ):
         self.study_name = study_name
         self.status = status
-        self.paras = paras
+        self.params = params
         self.create_time = create_time
         self.update_time = update_time
-        self.train_step = train_step
+        # self.train_step = train_step
         self.metric = metric
         self.id = id
     
     def __len__(self):
-        return len(self.paras)
+        return len(self.params)
     
-    def GetStatus(self):
+    def _get_status(self):
         return self.status
     
-    def PrintInfo(self):
+    def _info(self):
         print("================{}_{}================".format(self.study_name,self.id))
-        print("ID: {}, Create Time: {}, Update Time:{}, Train Step:{}".format(self.id,self.create_time,self.update_time,self.train_step))
+        print("ID: {}, Create Time: {}, Update Time:{}".format(self.id,time.asctime(time.localtime(self.create_time)),time.asctime(time.localtime(self.update_time))))
         print("Parameters:")
-        for key in self.paras:
-            print("{}: {}".format(key,self.paras[key]))
-        print("Metics:")
-        for key in self.metric:
-            print("{}: {}".format(key,self.metric[key]))
+        for key in self.params:
+            print("{}: {}".format(key,self.params[key]))
+        print("Metics:", self.metric)
     
-    def ToDict(self,dic):
+    def _to_dict(self,dic):
         return {'study_name':self.study_name,'status':self.status,
-                'paras':self.paras,'create_time':self.create_time,'update_time':self.update_time,
-                'train_step':self.train_step,'metric':self.metric,'id':self.id}
+                'params':self.params,'create_time':self.create_time,'update_time':self.update_time,
+                'metric':self.metric,'id':self.id}
 
     @classmethod
-    def FromDict(self,dic):
-        return Trials(study_name = dic['study_name'], paras = dic['paras'],
+    def _from_dict(self,dic):
+        return Trials(study_name = dic['study_name'], params = dic['params'],
                         status = dic['status'], create_time = dic['create_time'],
-                        update_time = dic['update_time'], train_step = dic['train_step'],
+                        update_time = dic['update_time'],
                         metric = dic['metric'],id = dic['id']
                         )

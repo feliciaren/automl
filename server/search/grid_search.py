@@ -40,19 +40,18 @@ class GridSearch(BasicSearch):
         self.param_num = len(param_key_list)
         all_combination_value = list(itertools.product(*param_values_list))
         self.all_combination = []
-
-        for value in range(len(all_combination_value)):
+        for value in all_combination_value:
             combination = {}
-            
-            for j in len(value):
+            value = list(value)
+            for j in range(len(value)):
                 combination[param_key_list[j]] = value[j]
             self.all_combination.append(combination)
-        
+        self.combination_num = len(self.all_combination)
         self.study_name = study.name
     
     def _get_next_trial(self,trials_list = [],number = 1):
 
-        if len(trials_list) < self.param_num:
+        if len(trials_list) < self.combination_num:
             new_trial = Trials(study_name = self.study_name,params=self.all_combination[len(trials_list)],create_time=time.time(),update_time=time.time())
             trials_list.append(new_trial)
             return trials_list[-1]

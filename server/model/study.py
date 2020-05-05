@@ -4,9 +4,10 @@
 @Author: feliciaren
 @Date: 2020-02-02 18:48:48
 @LastEditors: feliciaren
-@LastEditTime: 2020-02-23 23:24:12
+@LastEditTime: 2020-03-19 08:39:22
 '''
 __all__ = ['Study']
+
 import json
 import uuid
 import time
@@ -50,12 +51,12 @@ class Study(object):
         return dic
 
     @classmethod
-    def fromjson(self,json_file):
-        with open(json_file,'r',encoding='utf-8') as f:
-            dic = json.load(f)
+    def fromjson(self,json):
+        # with open(json_file,'r',encoding='utf-8') as f:
+        #     dic = json.load(f)
 
-        try:
-            assert('name' in dic)
+        # try:
+        assert('name' in dic)
             name = dic.pop('name') + uuid.uuid3(uuid.NAMESPACE_DNS,dic['name'])
         except AssertionError:
             name = uuid.uuid3(uuid.NAMESPACE_DNS,'')
