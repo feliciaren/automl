@@ -4,7 +4,7 @@
 @Author: feliciaren
 @Date: 2020-04-12 18:23:11
 @LastEditors: feliciaren
-@LastEditTime: 2020-05-05 21:26:59
+@LastEditTime: 2020-05-05 23:20:01
 '''
 import json
 import chocolate as choco
@@ -107,7 +107,7 @@ class BaseChocolateAlgorithm(BasicSearch):
               chocolate_params[param["parameterName"]])
 
       new_trial = Trials(study_name = self.study.name,params=parameter_values_json,create_time=time.time(),update_time=time.time())
-      trial_list.append(new_trial)
+      # trial_list.append(new_trial)
       return_list.append(new_trial)
 
     return return_list

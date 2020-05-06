@@ -4,7 +4,7 @@
 @Author: feliciaren
 @Date: 2020-02-22 19:36:41
 @LastEditors: feliciaren
-@LastEditTime: 2020-05-05 20:55:07
+@LastEditTime: 2020-05-05 23:20:47
 '''
 
 
@@ -55,7 +55,7 @@ class GridSearch(BasicSearch):
         for i in range(number):
             idex = len(trials_list) % len(self.all_combination)
             new_trial = Trials(study_name = self.study_name,params=self.all_combination[idex],create_time=time.time(),update_time=time.time())
-            trials_list.append(new_trial)
+            # trials_list.append(new_trial)
             return_list.append(new_trial)
             # return trials_list[-1]
         return return_list

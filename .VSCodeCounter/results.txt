@@ -1,0 +1,76 @@
+Date : 2020-05-06 00:23:37
+Directory : d:\school\automl\automl\server
+Total : 45 files,  2944 codes, 1218 comments, 743 blanks, all 4905 lines
+
+Languages
++------------------+------------+------------+------------+------------+------------+
+| language         | files      | code       | comment    | blank      | total      |
++------------------+------------+------------+------------+------------+------------+
+| Python           |         44 |      2,940 |      1,218 |        742 |      4,900 |
+| pip requirements |          1 |          4 |          0 |          1 |          5 |
++------------------+------------+------------+------------+------------+------------+
+
+Directories
++---------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                            | files      | code       | comment    | blank      | total      |
++---------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                               |         45 |      2,944 |      1,218 |        743 |      4,905 |
+| early_stop                                                                      |          5 |        288 |        352 |         73 |        713 |
+| feature_select                                                                  |         11 |      1,360 |        692 |        341 |      2,393 |
+| model                                                                           |          4 |        239 |          3 |         57 |        299 |
+| search                                                                          |         13 |        572 |        166 |        202 |        940 |
+| testtools                                                                       |          7 |        355 |          0 |         42 |        397 |
+| testtools\test_search                                                           |          7 |        355 |          0 |         42 |        397 |
++---------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++---------------------------------------------------------------------------------+------------------+------------+------------+------------+------------+
+| filename                                                                        | language         | code       | comment    | blank      | total      |
++---------------------------------------------------------------------------------+------------------+------------+------------+------------+------------+
+| d:\school\automl\automl\server\__init__.py                                      | Python           |         10 |          3 |          1 |         14 |
+| d:\school\automl\automl\server\cmd.py                                           | Python           |         43 |          1 |         17 |         61 |
+| d:\school\automl\automl\server\early_stop\basic_early_stop.py                   | Python           |         14 |          8 |          4 |         26 |
+| d:\school\automl\automl\server\early_stop\curve_functions.py                    | Python           |         75 |        176 |         30 |        281 |
+| d:\school\automl\automl\server\early_stop\curve_model.py                        | Python           |        153 |        168 |         16 |        337 |
+| d:\school\automl\automl\server\early_stop\curve_stop.py                         | Python           |         26 |          0 |         13 |         39 |
+| d:\school\automl\automl\server\early_stop\median_stop.py                        | Python           |         20 |          0 |         10 |         30 |
+| d:\school\automl\automl\server\feature_select\__init__.py                       | Python           |          1 |          0 |          0 |          1 |
+| d:\school\automl\automl\server\feature_select\basic_select.py                   | Python           |         19 |         16 |          4 |         39 |
+| d:\school\automl\automl\server\feature_select\constants.py                      | Python           |         53 |         27 |         21 |        101 |
+| d:\school\automl\automl\server\feature_select\fginitialize.py                   | Python           |        381 |        131 |        112 |        624 |
+| d:\school\automl\automl\server\feature_select\fgtrain.py                        | Python           |        154 |         32 |         43 |        229 |
+| d:\school\automl\automl\server\feature_select\gbdtselector.py                   | Python           |         53 |         53 |         17 |        123 |
+| d:\school\automl\automl\server\feature_select\gradient_selector.py              | Python           |        346 |        238 |         48 |        632 |
+| d:\school\automl\automl\server\feature_select\learnability.py                   | Python           |        304 |        152 |         74 |        530 |
+| d:\school\automl\automl\server\feature_select\requirements.txt                  | pip requirements |          4 |          0 |          1 |          5 |
+| d:\school\automl\automl\server\feature_select\syssettings.py                    | Python           |          4 |         21 |          5 |         30 |
+| d:\school\automl\automl\server\feature_select\utils.py                          | Python           |         41 |         22 |         16 |         79 |
+| d:\school\automl\automl\server\http_handler.py                                  | Python           |         38 |          1 |          6 |         45 |
+| d:\school\automl\automl\server\model\globals.py                                 | Python           |         13 |          0 |          4 |         17 |
+| d:\school\automl\automl\server\model\study.py                                   | Python           |         90 |          2 |         18 |        110 |
+| d:\school\automl\automl\server\model\trials.py                                  | Python           |         50 |          1 |          8 |         59 |
+| d:\school\automl\automl\server\model\worker.py                                  | Python           |         86 |          0 |         27 |        113 |
+| d:\school\automl\automl\server\search\__init__.py                               | Python           |          9 |          0 |          0 |          9 |
+| d:\school\automl\automl\server\search\base_chocolate_algorithm.py               | Python           |         71 |         15 |         28 |        114 |
+| d:\school\automl\automl\server\search\base_hyperopt_algorithm.py                | Python           |        137 |         27 |         52 |        216 |
+| d:\school\automl\automl\server\search\basic_search.py                           | Python           |         42 |          0 |          7 |         49 |
+| d:\school\automl\automl\server\search\bayesian_optimization.py                  | Python           |        123 |         25 |         45 |        193 |
+| d:\school\automl\automl\server\search\cmaes.py                                  | Python           |         12 |          3 |          3 |         18 |
+| d:\school\automl\automl\server\search\grid_search.py                            | Python           |         42 |          5 |         25 |         72 |
+| d:\school\automl\automl\server\search\mocmaes.py                                | Python           |         12 |          3 |          4 |         19 |
+| d:\school\automl\automl\server\search\random_fuction.py                         | Python           |         29 |         39 |          8 |         76 |
+| d:\school\automl\automl\server\search\random_search.py                          | Python           |         42 |          4 |         14 |         60 |
+| d:\school\automl\automl\server\search\simulate_anneal.py                        | Python           |         12 |          3 |          4 |         19 |
+| d:\school\automl\automl\server\search\static.py                                 | Python           |         29 |         39 |          8 |         76 |
+| d:\school\automl\automl\server\search\tpe.py                                    | Python           |         12 |          3 |          4 |         19 |
+| d:\school\automl\automl\server\setup.py                                         | Python           |         30 |          0 |          3 |         33 |
+| d:\school\automl\automl\server\testtools\test_search\test_basic_search.py       | Python           |         14 |          0 |          4 |         18 |
+| d:\school\automl\automl\server\testtools\test_search\test_bayes_optimization.py | Python           |         58 |          0 |          7 |         65 |
+| d:\school\automl\automl\server\testtools\test_search\test_grid_search.py        | Python           |         51 |          0 |          6 |         57 |
+| d:\school\automl\automl\server\testtools\test_search\test_mocmaes.py            | Python           |         58 |          0 |          6 |         64 |
+| d:\school\automl\automl\server\testtools\test_search\test_random_search.py      | Python           |         58 |          0 |          7 |         65 |
+| d:\school\automl\automl\server\testtools\test_search\test_simulate_anneal.py    | Python           |         58 |          0 |          6 |         64 |
+| d:\school\automl\automl\server\testtools\test_search\test_tpe.py                | Python           |         58 |          0 |          6 |         64 |
+| d:\school\automl\automl\server\version.py                                       | Python           |          9 |          0 |          1 |         10 |
+| Total                                                                           |                  |      2,944 |      1,218 |        743 |      4,905 |
++---------------------------------------------------------------------------------+------------------+------------+------------+------------+------------+

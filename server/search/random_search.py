@@ -4,7 +4,7 @@
 @Author: feliciaren
 @Date: 2020-02-23 21:05:21
 @LastEditors: feliciaren
-@LastEditTime: 2020-05-05 20:58:15
+@LastEditTime: 2020-05-05 23:21:00
 '''
 __all__ = ['RandomSearch']
 import json
@@ -54,6 +54,6 @@ class RandomSearch(BasicSearch):
 
       new_trial = Trials(study_name = study_name,params=parameter_values_json,create_time=time.time(),update_time=time.time())
       return_list.append(new_trial)
-      trials_list.append(new_trial)
+      # trials_list.append(new_trial)
 
     return return_list

@@ -4,7 +4,7 @@
 @Author: feliciaren
 @Date: 2020-02-02 18:48:48
 @LastEditors: feliciaren
-@LastEditTime: 2020-05-05 20:12:11
+@LastEditTime: 2020-05-05 23:12:55
 '''
 __all__ = ['Study']
 
@@ -18,6 +18,7 @@ class Study(object):
                 configuration,
                 algorithm = "BayesianOptimization",
                 goal = None,
+                earlystop = None,
                 create_time = None,
                 update_time = None):
 
@@ -27,6 +28,7 @@ class Study(object):
         self.goal = goal
         self.create_time = create_time
         self.update_time = update_time
+        self.earlystop = earlystop
 
     def _to_json(self):
         dic = self._to_dict()
@@ -76,7 +78,7 @@ class Study(object):
         return Study(name = name,configuration = dic['params'],algorithm = algorithm, goal = goal,create_time = time.time(),update_time = time.time())
     
     @classmethod
-    def _from_json(self,json):
+    def _from_json(self,json_file):
         with open(json_file,'r',encoding='utf-8') as f:
             dic = json.load(f)
 
@@ -97,5 +99,12 @@ class Study(object):
             algorithm = dic.pop('algorithm')
         except AssertionError:
             algorithm = "BayesianOptimization"
+
+
+        try:
+            assert('earlystop' in dic)
+            earlystop = dic.pop('eaylystop')
+        except AssertionError:
+            earlystop = None
         
-        return Study(name = name,configuration = dic['params'],algorithm = algorithm, goal = goal,create_time = time.time(),update_time = time.time())
+        return Study(name = name,configuration = dic['params'],algorithm = algorithm, goal = goal,earlystop=earlystop,create_time = time.time(),update_time = time.time())

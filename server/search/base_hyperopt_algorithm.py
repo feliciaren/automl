@@ -209,7 +209,7 @@ class BaseHyperoptAlgorithm(BasicSearch):
     #   new_advisor_trial.save()
     #   return_trial_list.append(new_advisor_trial)
       new_trial = Trials(study_name = self.study.name,params=parameter_values_json,create_time=time.time(),update_time=time.time())
-      trials_list.append(new_trial)
+      # trials_list.append(new_trial)
       return_list.append(new_trial)
 
     return return_list 
