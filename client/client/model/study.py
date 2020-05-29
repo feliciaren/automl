@@ -4,13 +4,16 @@
 @Author: feliciaren
 @Date: 2020-02-02 18:48:48
 @LastEditors: feliciaren
-@LastEditTime: 2020-05-29 14:40:43
+@LastEditTime: 2020-05-29 15:56:06
 '''
 __all__ = ['Study']
 
 import json
 import uuid
 import time
+
+from client.model.trials import Trials
+
 class Study(object):
     
     def __init__(self,
@@ -47,7 +50,7 @@ class Study(object):
     def _to_dict(self):
         dic = {}
         dic['name'] = self.name
-        dic['configuration'] = self.configuration
+        dic['params'] = self.configuration
         dic['create_time'] = self.create_time
         dic['update_time'] = self.update_time
         dic['goal'] = self.goal
@@ -85,7 +88,20 @@ class Study(object):
 
         try:
             assert('earlystop' in dic)
-            earlystop = dic.pop('eaylystop')
+            earlystop = dic.pop('earlystop')
+            try:
+                assert('trials_history' in earlystop)
+                earlystop['trials_history'] = [Trials()._from_dict(trial) for trial in earlystop['trials_history']] 
+            except AssertionError:
+                earlystop['trials_history'] = []
+            try:
+                assert('name' in earlystop)
+            except AssertionError:
+                earlystop['name'] = "MedianStop"
+            try:
+                assert('trial_metric' in earlystop)
+            except AssertionError:
+                earlystop['trial_metric'] = None
         except AssertionError:
             earlystop = None
 
@@ -127,7 +143,20 @@ class Study(object):
 
         try:
             assert('earlystop' in dic)
-            earlystop = dic.pop('eaylystop')
+            earlystop = dic.pop('earlystop')
+            try:
+                assert('trials_history' in earlystop)
+                earlystop['trials_history'] = [Trials()._from_dict(trial) for trial in earlystop['trials_history']] 
+            except AssertionError:
+                earlystop['trials_history'] = []
+            try:
+                assert('name' in earlystop)
+            except AssertionError:
+                earlystop['name'] = "MedianStop"
+            try:
+                assert('trial_metric' in earlystop)
+            except AssertionError:
+                earlystop['trial_metric'] = None
         except AssertionError:
             earlystop = None
 

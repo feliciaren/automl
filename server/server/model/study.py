@@ -4,7 +4,7 @@
 @Author: feliciaren
 @Date: 2020-02-02 18:48:48
 @LastEditors: feliciaren
-@LastEditTime: 2020-05-29 14:29:42
+@LastEditTime: 2020-05-29 15:54:58
 '''
 __all__ = ['Study']
 
@@ -54,7 +54,7 @@ class Study(object):
     def _to_dict(self):
         dic = {}
         dic['name'] = self.name
-        dic['configuration'] = self.configuration
+        dic['params'] = self.configuration
         dic['create_time'] = self.create_time
         dic['update_time'] = self.update_time
         dic['goal'] = self.goal
@@ -68,9 +68,9 @@ class Study(object):
 
         try:
             assert('name' in dic)
-            name = dic.pop('name') + uuid.uuid3(uuid.NAMESPACE_DNS,dic['name'])
+            name = dic.pop('name') + '_' + str(uuid.uuid3(uuid.NAMESPACE_DNS,str(time.time())))
         except AssertionError:
-            name = str(uuid.uuid3(uuid.NAMESPACE_DNS,''))
+            name = ' _' + str(uuid.uuid3(uuid.NAMESPACE_DNS,str(time.time())))
 
         try:
             assert('goal' in dic)

@@ -4,7 +4,7 @@
  * @Author: feliciaren
  * @Date: 2020-05-19 19:31:34
  * @LastEditors: feliciaren
- * @LastEditTime: 2020-05-29 15:13:28
+ * @LastEditTime: 2020-05-29 15:52:35
 --> 
 
 
@@ -39,6 +39,7 @@
 
 ```
     docker run -it -p 8686:8686 automlservice:latest /bin/bash
+    sh server.sh
 ```
 
 3. 测试

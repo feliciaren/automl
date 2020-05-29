@@ -4,7 +4,7 @@
 @Author: feliciaren
 @Date: 2020-05-25 09:01:17
 @LastEditors: feliciaren
-@LastEditTime: 2020-05-29 14:41:19
+@LastEditTime: 2020-05-29 15:50:41
 '''
 import random
 from client.model.worker import Worker
@@ -12,7 +12,7 @@ from client.model.worker import Worker
 
 class TestEarlyStop:
     def setup(self):
-        study_configuration_json = {
+        self.study_configuration_json = {
             "goal":
             "MAXIMIZE",
             "maxTrials":
@@ -39,7 +39,7 @@ class TestEarlyStop:
             }, {
                 "parameterName": "batch_normalization",
                 "type": "CATEGORICAL",
-                "feasiblePoints": [True,False],
+                "feasiblePoints": ['true','false'],
                 "scalingType": "LINEAR"
             },{
                 "parameterName": "learning_rate",
@@ -49,7 +49,7 @@ class TestEarlyStop:
                 "scalingType": "LINEAR"
             }]
         }
-        self.url = '127.0.0.1:8686'
+        self.url = 'http://127.0.0.1:8686'
 
 
     def test_get_next_trial(self):
@@ -57,11 +57,17 @@ class TestEarlyStop:
         trial_list = []
         trials_history = []
         for i in range(5):
-            res = worker._get_next_trials(trial_list,1)
+            res = worker._get_next_trials(self.url,trial_list,1)
             trial_list = res['trials_list']
             trial_list[-1]['metric'] = random.random()
             trials_history.append(random.random())
             res = worker._should_early_stop(self.url,trials_history,random.random())
     
+
+if __name__ == "__main__":
+    
+    test = TestEarlyStop()
+    test.setup()
+    test.test_get_next_trial()
 
 

@@ -4,7 +4,7 @@
 @Author: feliciaren
 @Date: 2020-02-02 18:48:48
 @LastEditors: feliciaren
-@LastEditTime: 2020-05-29 10:27:58
+@LastEditTime: 2020-05-29 15:44:44
 '''
 
 import json
@@ -40,6 +40,7 @@ class Worker(object):
         earlystop['trials_metric'] = trial_metric
         self.study.earlystop = earlystop
         request_json = self.study._to_dict()    
+        print(request_json)
         response = requests.post(url,data=request_json)
         return response.json()
       
@@ -57,6 +58,7 @@ class Worker(object):
         request_json = self.study._to_dict()
         request_json['trials_list'] = trials_list
         request_json['number'] = number
+        print(request_json)
         response = requests.post(url,data=request_json)
         return response.json()
     
