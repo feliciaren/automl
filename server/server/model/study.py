@@ -4,7 +4,7 @@
 @Author: feliciaren
 @Date: 2020-02-02 18:48:48
 @LastEditors: feliciaren
-@LastEditTime: 2020-05-29 10:10:45
+@LastEditTime: 2020-05-29 14:29:42
 '''
 __all__ = ['Study']
 
@@ -87,7 +87,19 @@ class Study(object):
         try:
             assert('earlystop' in dic)
             earlystop = dic.pop('earlystop')
-            earlystop['trials_history'] = [Trials()._from_dict(trial)for trial in earlystop['trials_history']] 
+            try:
+                assert('trials_history' in earlystop)
+                earlystop['trials_history'] = [Trials()._from_dict(trial) for trial in earlystop['trials_history']] 
+            except AssertionError:
+                earlystop['trials_history'] = []
+            try:
+                assert('name' in earlystop)
+            except AssertionError:
+                earlystop['name'] = "MedianStop"
+            try:
+                assert('trial_metric' in earlystop)
+            except AssertionError:
+                earlystop['trial_metric'] = None
         except AssertionError:
             earlystop = None
 
@@ -154,7 +166,19 @@ class Study(object):
         try:
             assert('earlystop' in dic)
             earlystop = dic.pop('earlystop')
-            earlystop['trials_history'] = [Trials()._from_dict(trial)for trial in earlystop['trials_history']] 
+            try:
+                assert('trials_history' in earlystop)
+                earlystop['trials_history'] = [Trials()._from_dict(trial) for trial in earlystop['trials_history']] 
+            except AssertionError:
+                earlystop['trials_history'] = []
+            try:
+                assert('name' in earlystop)
+            except AssertionError:
+                earlystop['name'] = "MedianStop"
+            try:
+                assert('trial_metric' in earlystop)
+            except AssertionError:
+                earlystop['trial_metric'] = None
         except AssertionError:
             earlystop = None
         

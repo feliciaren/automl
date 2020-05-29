@@ -4,7 +4,7 @@
 @Author: feliciaren
 @Date: 2020-02-02 18:48:48
 @LastEditors: feliciaren
-@LastEditTime: 2020-05-29 10:05:57
+@LastEditTime: 2020-05-29 14:40:43
 '''
 __all__ = ['Study']
 
@@ -52,10 +52,7 @@ class Study(object):
         dic['update_time'] = self.update_time
         dic['goal'] = self.goal
         if self.earlystop != None:
-            dic['earlystop'] = {}
-            dic['earlystop']['name'] = self.earlystop['name']
-            dic['earlystop']['trial_history'] = [trial._to_dict() for trial in self.earlystop['trial_history']]
-            dic['earlystop']['trials_metric']
+            dic['earlystop'] = self.earlystop
         if self.trials_list != None:
             dic['trials_list'] = [trial._to_dict() for trial in self.trials_list]
         return dic

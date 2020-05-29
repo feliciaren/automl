@@ -4,13 +4,12 @@
 @Author: feliciaren
 @Date: 2020-05-05 19:09:42
 @LastEditors: feliciaren
-@LastEditTime: 2020-05-20 09:08:16
+@LastEditTime: 2020-05-29 14:37:49
 '''
 
 import random
 
 from server.model.study import Study
-from server.search.random_search import RandomSearch
 from server.early_stop.curve_stop import CurveStop
 
 
@@ -27,7 +26,9 @@ class TestCurveStop:
             "randomInitTrials":
             1,
             "earlystop":{
-                "target_pos" : 10
+                "target_pos" : 10,
+                "trials_history" : [],
+                "trial_metric" : 1,
             },
             "params": [{
                 "parameterName": "hidden",
@@ -62,15 +63,11 @@ class TestCurveStop:
 
     
     def test_should_early_stop(self):
-
-        randomsearch = RandomSearch()
         stop = CurveStop()
         self.trials_list =  []
         for i in range(10):
-            next_trial = randomsearch._get_next_trial(self.study,self.trials_list,1)
-            next_trial[0].metric = random.random()
-            self.trials_list.extend(next_trial)
-            result = stop._should_early_stop(self.study,self.trials_list,1)
+            self.trials_list.append(random.random())
+            result = stop._should_early_stop(self.study,self.trials_list,random.random())
             assert(result in [True, False])
 
 

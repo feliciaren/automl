@@ -4,16 +4,15 @@
 @Author: feliciaren
 @Date: 2020-05-25 09:01:17
 @LastEditors: feliciaren
-@LastEditTime: 2020-05-29 10:34:11
+@LastEditTime: 2020-05-29 14:41:19
 '''
 import random
 from client.model.worker import Worker
 
 
-
 class TestEarlyStop:
     def setup(self):
-        self.study_configuration_json = {
+        study_configuration_json = {
             "goal":
             "MAXIMIZE",
             "maxTrials":
@@ -22,6 +21,11 @@ class TestEarlyStop:
             1,
             "randomInitTrials":
             1,
+            "earlystop":{
+                "target_pos" : 10,
+                "trials_history" : [],
+                "trial_metric" : 1,
+            },
             "params": [{
                 "parameterName": "hidden",
                 "type": "DISCRETE",
@@ -51,11 +55,13 @@ class TestEarlyStop:
     def test_get_next_trial(self):
         worker = Worker()._from_json(self.study_configuration_json)
         trial_list = []
+        trials_history = []
         for i in range(5):
             res = worker._get_next_trials(trial_list,1)
             trial_list = res['trials_list']
             trial_list[-1]['metric'] = random.random()
-            res = worker._should_early_stop(self.url,trial_list,random.random())
+            trials_history.append(random.random())
+            res = worker._should_early_stop(self.url,trials_history,random.random())
     
 
 

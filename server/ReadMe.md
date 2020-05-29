@@ -4,12 +4,11 @@
  * @Author: feliciaren
  * @Date: 2020-05-19 19:31:34
  * @LastEditors: feliciaren
- * @LastEditTime: 2020-05-19 22:05:04
+ * @LastEditTime: 2020-05-29 15:13:28
 --> 
 
 
 # 自动机器学习系统
-
 
 
 ## 框架结构
@@ -27,5 +26,23 @@
 
 ```
 
+## 使用方法
 
+1. build docker:
 
+```
+    sh build_docker.sh
+
+```
+
+2. 启动服务
+
+```
+    docker run -it -p 8686:8686 automlservice:latest /bin/bash
+```
+
+3. 测试
+
+```
+    sh liveness_prob.sh
+```
