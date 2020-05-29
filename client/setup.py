@@ -4,20 +4,12 @@
 @Author: feliciaren
 @Date: 2020-03-19 08:50:01
 @LastEditors: feliciaren
-@LastEditTime: 2020-03-19 08:58:55
+@LastEditTime: 2020-05-19 17:22:46
 '''
-'''
-@Descripttion: 
-@version: 
-@Author: feliciaren
-@Date: 2020-03-18 23:15:11
-@LastEditors: feliciaren
-@LastEditTime: 2020-03-19 07:45:24
-'''
+
 from setuptools import setup, find_packages
 import os
 import re
-
 
 def find_version():
     fn = os.path.join(os.path.dirname(__file__), '', 'version.py')
@@ -29,14 +21,11 @@ def find_version():
 
 
 setup(
-    name='automl_serving',
+    name='automlclient',
     version=find_version(),
     description=
-    'A simple automl service http client.',
+    'A simple automl service http service by aiohttp.',
     packages=find_packages(),
     install_requires=[
-        'numpy',
-    ],
-    entry_points={
-        'console_scripts': ['ner-client=cmd:entry_point'],
-    })
+       'numpy','requests'
+    ])

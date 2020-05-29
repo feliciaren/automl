@@ -4,7 +4,7 @@
 @Author: feliciaren
 @Date: 2020-02-02 18:48:48
 @LastEditors: feliciaren
-@LastEditTime: 2020-03-19 08:59:42
+@LastEditTime: 2020-05-19 15:13:40
 '''
 __all__ = ['Trials']
 import time
@@ -45,7 +45,7 @@ class Trials(object):
             print("{}: {}".format(key,self.params[key]))
         print("Metics:", self.metric)
     
-    def _to_dict(self,dic):
+    def _to_dict(self):
         return {'study_name':self.study_name,'status':self.status,
                 'params':self.params,'create_time':self.create_time,'update_time':self.update_time,
                 'metric':self.metric,'id':self.id}

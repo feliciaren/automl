@@ -4,11 +4,11 @@
 @Author: feliciaren
 @Date: 2020-02-23 18:26:23
 @LastEditors: feliciaren
-@LastEditTime: 2020-02-23 18:26:30
+@LastEditTime: 2020-05-19 19:02:49
 '''
 import tensorflow as tf 
 import numpy as np 
-
+from config import *
 class DNN(object):
     def __init__(self,
         hidden_layer_size,
@@ -58,8 +58,8 @@ class DNN(object):
             weights = self.get_weight_variable([self.input_size,self.hidden_layer_size],self.regularizer,name = 'Input_Weights')
             biases = self.get_bias_variable([self.hidden_layer_size],'Input_Biases')
             layer1 = tf.nn.relu(tf.matmul(self.inputs,weights) + biases) 
-            tf.summary.histogram('Input_Weights',weights)
-            tf.summary.histogram('Input_Biases',biases)
+            # tf.summary.histogram('Input_Weights',weights)
+            # tf.summary.histogram('Input_Biases',biases)
             self.cur_layer = layer1
 
         for i in range(self.depth):
@@ -67,15 +67,15 @@ class DNN(object):
                 weights = self.get_weight_variable([self.hidden_layer_size,self.hidden_layer_size],self.regularizer,'Layer'+ str(i) + '_Weights')
                 biases = self.get_bias_variable([self.hidden_layer_size],'Layer'+ str(i) + 'Biases')
                 self.cur_layer = tf.nn.relu(tf.matmul(self.cur_layer,weights) + biases)
-                tf.summary.histogram('Layer'+ str(i) + 'Weights',weights)
-                tf.summary.histogram('Layer' + str(i) + 'Biases',biases)
+                # tf.summary.histogram('Layer'+ str(i) + 'Weights',weights)
+                # tf.summary.histogram('Layer' + str(i) + 'Biases',biases)
 
         with tf.variable_scope('Output_Layer'):
             weights = self.get_weight_variable([self.hidden_layer_size,self.output_size],self.regularizer,'Output_Weights')
             biases = self.get_bias_variable([self.output_size],'Output_Biases')
             self.outputs = tf.matmul(self.cur_layer,weights) + biases
-            tf.summary.histogram('Output_Weights',weights)
-            tf.summary.histogram('Output_Biases',biases)
+            # tf.summary.histogram('Output_Weights',weights)
+            # tf.summary.histogram('Output_Biases',biases)
 
         variable_averages = tf.train.ExponentialMovingAverage(self.moving_average_decay,self.global_step)
         self.variable_averages_op = variable_averages.apply(tf.trainable_variables())
@@ -88,11 +88,11 @@ class DNN(object):
             se = tf.square(self.targets-self.outputs)
             self.cost = tf.reduce_mean(se)
             tf.summary.scalar('Train_MSE',self.cost)
-            tf.summary.histogram('Train_MSE',self.cost)
+            # tf.summary.histogram('Train_MSE',self.cost)
 
             self.loss = self.cost + tf.add_n(tf.get_collection('losses'))
             tf.summary.scalar('Train_Loss',self.loss)
-            tf.summary.histogram('Train_Loss',self.loss)
+            # tf.summary.histogram('Train_Loss',self.loss)
             self.learning_rate = tf.train.exponential_decay(self.learning_rate_base,
                                                         self.global_step,
                                                         self.evaluate_step,
@@ -108,7 +108,7 @@ class DNN(object):
             self.eval_cost = tf.abs(self.targets-self.outputs)
             self.eval_loss = tf.reduce_mean(tf.square(self.targets-self.outputs))
             tf.summary.scalar('Eval_Loss',self.eval_loss)
-            tf.summary.histogram('Eval_Loss',self.eval_loss)
+            # tf.summary.histogram('Eval_Loss',self.eval_loss)
 
 
         self.summary_op = tf.summary.merge_all()
@@ -200,7 +200,23 @@ def test():
 
 
 
-test()
+# test()
+
+# def main():
+
+    
+#     train_x = np.load(save_dir + 'x.npy')
+#     train_y = np.load(save_dir + 'y.npy')
+
+
+#     eval_x = np.load(test_dir + 'x_test.npy')
+#     eval_y = np.load(test_dir + 'y_test.npy')
+
+#     print('Train X size:',train_x.shape)
+#     print(len(train_y[0]))
+
+#     print('Eval X size:',eval_x.shape)
+
 
 
 
