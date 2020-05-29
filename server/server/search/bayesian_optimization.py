@@ -4,7 +4,7 @@
 @Author: feliciaren
 @Date: 2020-02-23 14:53:01
 @LastEditors: feliciaren
-@LastEditTime: 2020-05-20 09:03:38
+@LastEditTime: 2020-05-29 18:34:44
 '''
 __all__ = ['BayesianOptimization']
 import numpy as np
