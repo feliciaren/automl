@@ -4,7 +4,7 @@
 @Author: feliciaren
 @Date: 2020-02-02 18:48:48
 @LastEditors: feliciaren
-@LastEditTime: 2020-05-29 09:53:22
+@LastEditTime: 2020-05-29 14:22:14
 '''
 
 import json
@@ -46,13 +46,12 @@ class Worker(object):
         self.update_time = update_time
         self.search = search
         self.early_stop = early_stop
-        self.trial_metric = None
 
     
     async def _should_trial_stop(self):
         if self.early_stop== None:
             raise Exception("Wrong Search Type")
-        return self.early_stop(self.study,self.study.earlystop['trials_history'],self.trial_metric)
+        return self.early_stop(self.study,self.study.earlystop['trials_history'],self.study.earlystop['trial_metric'])
 
     async def startup(self,app):
         pass        
