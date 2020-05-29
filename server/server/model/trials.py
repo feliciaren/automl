@@ -4,7 +4,7 @@
 @Author: feliciaren
 @Date: 2020-02-02 18:48:48
 @LastEditors: feliciaren
-@LastEditTime: 2020-05-20 22:14:30
+@LastEditTime: 2020-05-29 16:16:00
 '''
 __all__ = ['Trials']
 import time
@@ -18,7 +18,6 @@ class Trials(object):
                 status = "ToDo",
                 create_time = None,
                 update_time = None,
-                train_step = 10,
                 metric = None,
                 id = None
                 ):

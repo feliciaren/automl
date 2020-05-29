@@ -4,7 +4,7 @@
 @Author: feliciaren
 @Date: 2020-05-25 09:01:17
 @LastEditors: feliciaren
-@LastEditTime: 2020-05-29 15:50:41
+@LastEditTime: 2020-05-29 16:19:59
 '''
 import random
 from client.model.worker import Worker
@@ -58,10 +58,11 @@ class TestEarlyStop:
         trials_history = []
         for i in range(5):
             res = worker._get_next_trials(self.url,trial_list,1)
-            trial_list = res['trials_list']
-            trial_list[-1]['metric'] = random.random()
+            print(res)
+            trial_list.append(res)
+            trial_list[-1].metric = random.random()
             trials_history.append(random.random())
-            res = worker._should_early_stop(self.url,trials_history,random.random())
+            res = worker._should_trial_stop(self.url,trials_history,random.random())
     
 
 if __name__ == "__main__":

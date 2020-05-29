@@ -4,7 +4,7 @@
 @Author: feliciaren
 @Date: 2020-02-02 18:48:48
 @LastEditors: feliciaren
-@LastEditTime: 2020-05-29 15:44:44
+@LastEditTime: 2020-05-29 16:25:16
 '''
 
 import json
@@ -37,12 +37,12 @@ class Worker(object):
         earlystop = {}
         earlystop['name'] = algorithm
         earlystop['trials_history'] = trial_history
-        earlystop['trials_metric'] = trial_metric
+        earlystop['trial_metric'] = trial_metric
         self.study.earlystop = earlystop
-        request_json = self.study._to_dict()    
+        request_json = json.dumps(self.study._to_dict())    
         print(request_json)
         response = requests.post(url,data=request_json)
-        return response.json()
+        return response.json()[0]
       
 
     def _add_measurement_to_trial(self,trial_metric,trial):
@@ -58,9 +58,13 @@ class Worker(object):
         request_json = self.study._to_dict()
         request_json['trials_list'] = trials_list
         request_json['number'] = number
+        request_json = json.dumps(request_json)
         print(request_json)
         response = requests.post(url,data=request_json)
-        return response.json()
+        print(type(response.json()[0]))
+        print(response.json()[0])
+        result = Trials._from_dict(response.json()[0])
+        return result
     
     def _get_study_name(self):
         return self.study.name

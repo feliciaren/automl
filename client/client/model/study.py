@@ -4,7 +4,7 @@
 @Author: feliciaren
 @Date: 2020-02-02 18:48:48
 @LastEditors: feliciaren
-@LastEditTime: 2020-05-29 15:56:06
+@LastEditTime: 2020-05-29 16:28:08
 '''
 __all__ = ['Study']
 
@@ -91,7 +91,6 @@ class Study(object):
             earlystop = dic.pop('earlystop')
             try:
                 assert('trials_history' in earlystop)
-                earlystop['trials_history'] = [Trials()._from_dict(trial) for trial in earlystop['trials_history']] 
             except AssertionError:
                 earlystop['trials_history'] = []
             try:
@@ -110,7 +109,7 @@ class Study(object):
             json_list = dic.pop('trials_list')
             trials_list = []
             for dic in json_list:
-                trial = Trials()._from_dict(dic)
+                trial = Trials._from_dict(dic)
                 trials_list.append(trial)
         except AssertionError:
             trials_list = None
@@ -146,7 +145,6 @@ class Study(object):
             earlystop = dic.pop('earlystop')
             try:
                 assert('trials_history' in earlystop)
-                earlystop['trials_history'] = [Trials()._from_dict(trial) for trial in earlystop['trials_history']] 
             except AssertionError:
                 earlystop['trials_history'] = []
             try:
@@ -165,7 +163,7 @@ class Study(object):
             json_list = dic.pop('trials_list')
             trials_list = []
             for dic in json_list:
-                trial = Trials()._from_dict(dic)
+                trial = Trials._from_dict(dic)
                 trials_list.append(trial)
         except AssertionError:
             trials_list = None
